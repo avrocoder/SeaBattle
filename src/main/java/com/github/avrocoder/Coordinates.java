@@ -25,6 +25,11 @@ public class Coordinates {
     public void setY(int y) {
         this.y = y;
     }
+    public Coordinates shift(Orientation orientation, int shift) {
+        return (orientation == Orientation.HORIZONTAL) ?
+                new Coordinates(getX() + shift, getY()) :
+                new Coordinates(getX(), getY() + shift);
+    }
 
     @Override
     public boolean equals(Object o) {
