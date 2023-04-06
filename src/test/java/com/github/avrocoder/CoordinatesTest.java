@@ -1,14 +1,14 @@
 package com.github.avrocoder;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CoordinatesTest {
-    private static Coordinates coordinates;
-    @BeforeAll
-    static void beforeAll() {
+    private Coordinates coordinates;
+    @BeforeEach
+    void setUp() {
         coordinates = new Coordinates(10, 20);
     }
 
@@ -34,4 +34,16 @@ class CoordinatesTest {
         assertEquals(38, coordinates.getY());
     }
 
+    @Test
+    void shiftHorizontal() {
+        Coordinates shiftCoordinates = coordinates.shift(Orientation.HORIZONTAL, 3);
+        assertEquals(13, shiftCoordinates.getX());
+        assertEquals(20, shiftCoordinates.getY());
+    }
+    @Test
+    void shiftVertical() {
+        Coordinates shiftCoordinates = coordinates.shift(Orientation.VERTICAL, 3);
+        assertEquals(10, shiftCoordinates.getX());
+        assertEquals(23, shiftCoordinates.getY());
+    }
 }
