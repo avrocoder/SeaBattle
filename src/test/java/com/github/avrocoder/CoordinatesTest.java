@@ -46,4 +46,16 @@ class CoordinatesTest {
         assertEquals(10, shiftCoordinates.getX());
         assertEquals(23, shiftCoordinates.getY());
     }
+
+    @Test
+    void shiftX() {
+        Coordinates shiftCoordinates = coordinates.shiftX(5);
+        assertEquals(15, shiftCoordinates.getX());
+    }
+
+    @Test
+    void shiftY() {
+        Coordinates shiftCoordinates = coordinates.shiftY(7);
+        assertEquals(27, shiftCoordinates.getY());
+    }
 }
