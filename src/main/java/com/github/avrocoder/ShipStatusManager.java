@@ -4,7 +4,7 @@ public class ShipStatusManager {
     public static ShipStatus getCalculatedStatus(Ship ship) {
         int numDecksDestroyed = 0;
         for (Deck deck: ship.getDecks().values()) {
-            if (deck.isDestroyed())
+            if (deck.isDamaged())
                 numDecksDestroyed++;
         }
         if (numDecksDestroyed == 0) {
