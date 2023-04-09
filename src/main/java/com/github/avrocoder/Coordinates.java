@@ -26,9 +26,14 @@ public class Coordinates {
         this.y = y;
     }
     public Coordinates shift(Orientation orientation, int shift) {
-        return (orientation == Orientation.HORIZONTAL) ?
-                new Coordinates(getX() + shift, getY()) :
-                new Coordinates(getX(), getY() + shift);
+        return (orientation == Orientation.HORIZONTAL) ? this.shiftX(shift) : this.shiftY(shift);
+    }
+    public Coordinates shiftX(int shift) {
+        return new Coordinates(this.getX() + shift, this.y);
+    }
+
+    public Coordinates shiftY(int shift) {
+        return new Coordinates(this.x, this.getY() + shift);
     }
 
     @Override
