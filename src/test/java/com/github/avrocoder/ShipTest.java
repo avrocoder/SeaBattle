@@ -45,17 +45,17 @@ class ShipTest {
     void getDecks() {
         Map<Coordinates, Deck> factDecks = shipHorizontal.getDecks();
         Map<Coordinates, Deck> expectedDecks = new HashMap<>();
-        expectedDecks.put(new Coordinates(3, 5), new Deck());
-        expectedDecks.put(new Coordinates(4, 5), new Deck());
-        expectedDecks.put(new Coordinates(5, 5), new Deck());
+        expectedDecks.put(new Coordinates(3, 5), new Deck(new Coordinates(3, 5),shipHorizontal));
+        expectedDecks.put(new Coordinates(4, 5), new Deck(new Coordinates(4, 5), shipHorizontal));
+        expectedDecks.put(new Coordinates(5, 5), new Deck(new Coordinates(5, 5), shipHorizontal));
         assertEquals(factDecks,expectedDecks);
 
         factDecks = shipVertical.getDecks();
         expectedDecks = new HashMap<>();
-        expectedDecks.put(new Coordinates(8, 6), new Deck());
-        expectedDecks.put(new Coordinates(8, 7), new Deck());
-        expectedDecks.put(new Coordinates(8, 8), new Deck());
-        expectedDecks.put(new Coordinates(8, 9), new Deck());
+        expectedDecks.put(new Coordinates(8, 6), new Deck(new Coordinates(8, 6),shipVertical));
+        expectedDecks.put(new Coordinates(8, 7), new Deck(new Coordinates(8, 7),shipVertical));
+        expectedDecks.put(new Coordinates(8, 8), new Deck(new Coordinates(8, 8),shipVertical));
+        expectedDecks.put(new Coordinates(8, 9), new Deck(new Coordinates(8, 9),shipVertical));
         assertEquals(factDecks,expectedDecks);
     }
     @Test
@@ -64,35 +64,45 @@ class ShipTest {
         assertEquals(defaultShipStatus, shipVertical.getStatus());
     }
     @Test
-    void testGetDamagedAndDestroyedShipStatus() {
+    void testGetDamagedAndDestroyedHorizontalShipStatus() {
         //first deck damage
-        shipHorizontal.getDecks().get(shipHorizontal.getHeadCoordinates()).setDestroyedStatus();
-        shipVertical.getDecks().get(shipVertical.getHeadCoordinates()).setDestroyedStatus();
+        shipHorizontal.getDecks().get(shipHorizontal.getHeadCoordinates()).setDamaged();
         assertEquals(ShipStatus.DAMAGED, shipHorizontal.getStatus());
-        assertEquals(ShipStatus.DAMAGED, shipVertical.getStatus());
+
         //second deck damage
-        shipHorizontal.getDecks().get(shipHorizontal.getHeadCoordinates().shift(
-                shipHorizontal.getOrientation(),1)
-        ).setDestroyedStatus();
-        shipVertical.getDecks().get(shipVertical.getHeadCoordinates().shift(
-                shipVertical.getOrientation(), 1)
-        ).setDestroyedStatus();
+        shipHorizontal.getDecks().get(shipHorizontal.getHeadCoordinates().shiftX(1)).setDamaged();
         assertEquals(ShipStatus.DAMAGED, shipHorizontal.getStatus());
-        assertEquals(ShipStatus.DAMAGED, shipVertical.getStatus());
+
         //third deck damage
-        shipHorizontal.getDecks().get(shipHorizontal.getHeadCoordinates().shift(
-                shipHorizontal.getOrientation(),2)
-        ).setDestroyedStatus();
-        shipVertical.getDecks().get(shipVertical.getHeadCoordinates().shift(
-                shipVertical.getOrientation(), 2)
-        ).setDestroyedStatus();
-        //ShipVertical has destroyed
+        shipHorizontal.getDecks().get(shipHorizontal.getHeadCoordinates().shiftX(2)).setDamaged();
+        //ship has destroyed
         assertEquals(ShipStatus.DESTROYED, shipHorizontal.getStatus());
-        assertEquals(ShipStatus.DAMAGED, shipVertical.getStatus());
-        //fourth deck damage
-        shipVertical.getDecks().get(shipVertical.getHeadCoordinates().shift(
-                shipVertical.getOrientation(), 3)
-        ).setDestroyedStatus();
-        assertEquals(ShipStatus.DESTROYED, shipVertical.getStatus());
     }
+    @Test
+    void testGetDamagedAndDestroyedVerticalShipStatus() {
+        //first deck damage
+        shipVertical.getDecks().get(shipVertical.getHeadCoordinates()).setDamaged();
+        assertEquals(ShipStatus.DAMAGED, shipVertical.getStatus());
+
+        //second deck damage
+        shipVertical.getDecks().get(shipVertical.getHeadCoordinates().shiftY(1)).setDamaged();
+        assertEquals(ShipStatus.DAMAGED, shipVertical.getStatus());
+
+        //third deck damage
+        shipVertical.getDecks().get(shipVertical.getHeadCoordinates().shiftY(2)).setDamaged();
+        assertEquals(ShipStatus.DAMAGED, shipVertical.getStatus());
+
+        //fourth deck damage
+        shipVertical.getDecks().get(shipVertical.getHeadCoordinates().shiftY(3)).setDamaged();
+        assertEquals(ShipStatus.DESTROYED, shipVertical.getStatus());
+
+    }
+
+    @Test
+    void getOrientation() {
+        assertEquals(Orientation.HORIZONTAL, shipHorizontal.getOrientation());
+    }
+
+
+
 }
