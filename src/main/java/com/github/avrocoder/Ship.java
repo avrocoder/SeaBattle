@@ -1,5 +1,6 @@
 package com.github.avrocoder;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -58,5 +59,24 @@ public class Ship {
             }
         }
         this.status = status;
+    }
+
+    /**
+     *
+     * @param number it's a number of deck from 0 to size-1
+     * @return Map.Entry deck by number
+     * @throws IndexOutOfBoundsException if deck number is missing
+     */
+    public Map.Entry<Coordinates, Deck> getMapEntryDeckByNumber(int number) {
+        Iterator<Map.Entry<Coordinates, Deck>> iterator = decks.entrySet().iterator();
+        int i = 0;
+        while(iterator.hasNext()) {
+            if (i == number) {
+                return iterator.next();
+            }
+            iterator.next();
+            i++;
+        }
+        throw(new IndexOutOfBoundsException("Deck number " + number + " is missing"));
     }
 }
