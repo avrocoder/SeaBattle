@@ -25,8 +25,8 @@ public class Coordinates {
     public void setY(int y) {
         this.y = y;
     }
-    public Coordinates shift(Orientation orientation, int shift) {
-        return (orientation == Orientation.HORIZONTAL) ? this.shiftX(shift) : this.shiftY(shift);
+    public Coordinates shift(int shiftX, int shiftY) {
+        return this.shiftX(shiftX).shiftY(shiftY);
     }
     public Coordinates shiftX(int shift) {
         return new Coordinates(this.getX() + shift, this.y);
