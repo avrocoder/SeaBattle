@@ -21,7 +21,12 @@ public class Ship {
 
     private void decksInit() {
         for (int i = 0; i < size; i++) {
-            Coordinates deckCoordinate = headCoordinates.shift(this.orientation, i);
+            Coordinates deckCoordinate;
+            if (orientation == Orientation.HORIZONTAL) {
+                deckCoordinate = headCoordinates.shiftX(i);
+            } else {
+                deckCoordinate = headCoordinates.shiftY(i);
+            }
             decks.put(deckCoordinate, new Deck(deckCoordinate, this));
         }
     }
