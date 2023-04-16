@@ -6,37 +6,53 @@ import com.github.avrocoder.Field;
 import java.util.ArrayList;
 
 public class Validation {
-    private final Coordinates coordinates;
-    private final Field field;
-    private final ArrayList<String> message = new ArrayList<>();
+    private Coordinates coordinates;
+    protected final Field field;
+    private final ArrayList<String> messages = new ArrayList<>();
+
+    public Validation(Field field) {
+        this.field = field;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
 
     public Validation(Coordinates coordinates, Field field) {
         this.coordinates = coordinates;
         this.field = field;
     }
 
-    public ArrayList<String> getMessage() {
-        return message;
+    public boolean hasError() {
+        return !messages.isEmpty();
+    }
+
+    public ArrayList<String> getMessages() {
+        return messages;
+    }
+
+    public void addMessage(String message) {
+        messages.add(message);
     }
 
     public boolean validate() {
-        return isValidEmptyCell() && isValidOutOfBoundsShot();
+        return isValidEmptyCell() && isValidOutOfBounds();
     }
 
-    private boolean isValidEmptyCell() {
+    protected boolean isValidEmptyCell() {
         if (field.isEmptyCell(coordinates)) {
             return true;
         } else {
-            message.add("Cell is occupied");
+            addMessage("Cell is occupied");
             return false;
         }
     }
 
-    private boolean isValidOutOfBoundsShot() {
+    protected boolean isValidOutOfBounds() {
         if (coordinates.getX() < field.getWidth() && coordinates.getY() < field.getHeight()) {
             return true;
         } else {
-            message.add("Coordinates are out of bounds");
+            addMessage("Coordinates are out of bounds");
             return false;
         }
     }
