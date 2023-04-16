@@ -36,13 +36,13 @@ class CoordinatesTest {
 
     @Test
     void shiftHorizontal() {
-        Coordinates shiftCoordinates = coordinates.shift(Orientation.HORIZONTAL, 3);
+        Coordinates shiftCoordinates = coordinates.shiftX(3);
         assertEquals(13, shiftCoordinates.getX());
         assertEquals(20, shiftCoordinates.getY());
     }
     @Test
     void shiftVertical() {
-        Coordinates shiftCoordinates = coordinates.shift(Orientation.VERTICAL, 3);
+        Coordinates shiftCoordinates = coordinates.shiftY(3);
         assertEquals(10, shiftCoordinates.getX());
         assertEquals(23, shiftCoordinates.getY());
     }
@@ -57,5 +57,11 @@ class CoordinatesTest {
     void shiftY() {
         Coordinates shiftCoordinates = coordinates.shiftY(7);
         assertEquals(27, shiftCoordinates.getY());
+    }
+
+    @Test
+    void shift() {
+        Coordinates shiftCoordinates = coordinates.shift(7, -4);
+        assertEquals(new Coordinates(17, 16), shiftCoordinates);
     }
 }
