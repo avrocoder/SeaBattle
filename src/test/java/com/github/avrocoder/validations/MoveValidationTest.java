@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MoveValidationTest {
     private final ShotsField shotsField = new ShotsField(10, 10);
+    private final ShipsField shipsField = new ShipsField(10, 10);
 
     @Test
     void validateCorrectMove() {
@@ -20,7 +21,7 @@ class MoveValidationTest {
 
     @Test
     void validateFailMoveNotEmptyCell() {
-        Move move = new Move(shotsField);
+        Move move = new Move(shotsField, shipsField);
         Coordinates coordinates = new Coordinates(0, 0);
         move.make(coordinates);
         MoveValidation moveValidation = new MoveValidation(coordinates, shotsField);
@@ -32,7 +33,7 @@ class MoveValidationTest {
 
     @Test
     void validateFailMoveOutOfBounds() {
-        Move move = new Move(shotsField);
+        Move move = new Move(shotsField, shipsField);
         Coordinates coordinates = new Coordinates(10, 10);
         move.make(coordinates);
         MoveValidation moveValidation = new MoveValidation(coordinates, shotsField);
