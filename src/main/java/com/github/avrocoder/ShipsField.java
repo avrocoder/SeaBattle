@@ -6,8 +6,21 @@ public class ShipsField extends Field<Deck>{
         super(width, height);
     }
 
-    public void placeShip(Ship ship) {
-        //todo check possibility ship place through validator
-        ship.getDecks().forEach(this::place);
+    public ShipsField() {
+        super();
     }
+
+    public void placeShip(Ship ship) {
+            ship.getDecks().forEach(this::place);
+    }
+
+    public boolean isAllShipsAreDestroyed() {
+        for (Deck deck : getField().values()) {
+            if(deck.getShipOwner().getStatus() != ShipStatus.DESTROYED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
