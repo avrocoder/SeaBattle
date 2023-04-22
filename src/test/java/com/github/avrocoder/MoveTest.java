@@ -7,14 +7,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MoveTest {
     private ShotsField shotsField;
+    private ShipsField shipsField;
     @BeforeEach
     void setUp() {
         shotsField = new ShotsField(10, 10);
+        shipsField = new ShipsField(10, 10);
     }
 
     @Test
     void checkExistenceShotOnField() {
-        Move move = new Move(shotsField);
+        Move move = new Move(shotsField, shipsField);
         Coordinates coordinates = new Coordinates(0, 0);
         move.make(coordinates);
 
