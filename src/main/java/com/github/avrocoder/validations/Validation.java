@@ -32,7 +32,9 @@ public class Validation {
     }
 
     public void addMessage(String message) {
-        messages.add(message);
+        if(!messages.contains(message)) {
+            messages.add(message);
+        }
     }
 
     public boolean validate() {
@@ -49,11 +51,11 @@ public class Validation {
     }
 
     protected boolean isValidOutOfBounds() {
-        if (coordinates.getX() < field.getWidth() && coordinates.getY() < field.getHeight()) {
-            return true;
-        } else {
+        if (coordinates.getX() >= field.getWidth() || coordinates.getY() >= field.getHeight()
+            || coordinates.getX() < 0 || coordinates.getY() < 0) {
             addMessage("Coordinates are out of bounds");
             return false;
         }
+        return true;
     }
 }

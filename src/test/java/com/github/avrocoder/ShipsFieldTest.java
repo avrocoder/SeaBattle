@@ -1,19 +1,21 @@
 package com.github.avrocoder;
 
+import com.github.avrocoder.validations.ShipValidation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShipsFieldTest {
-    private final ShipsField shipsField = new ShipsField(10, 8);
+    private ShipsField shipsField;
     private Ship shipHorizontal;
     private Ship shipVertical;
 
     @BeforeEach
     void setUp() {
-        shipHorizontal = new Ship(new Coordinates(7, 7), 4, Orientation.HORIZONTAL);
+        shipHorizontal = new Ship(new Coordinates(6, 7), 4, Orientation.HORIZONTAL);
         shipVertical = new Ship(new Coordinates(2, 1), 3, Orientation.VERTICAL);
+        shipsField = new ShipsField(10, 8);
     }
 
     @Test
@@ -32,6 +34,7 @@ class ShipsFieldTest {
     @Test
     void checkComplianceCoordinatesDecksOnFieldAndDecksHorizontalShipAfterPlace() {
         shipsField.placeShip(shipHorizontal);
+
         Coordinates headCoordinate = shipHorizontal.getHeadCoordinates();
         Deck deckOnField1 = shipsField.getField().get(headCoordinate);
         Deck deckOnField2 = shipsField.getField().get(headCoordinate.shiftX(1));
@@ -62,10 +65,10 @@ class ShipsFieldTest {
     void checkEmptyCell() {
         shipsField.placeShip(shipHorizontal);
 
-        Coordinates coordinates1 = new Coordinates(7, 8);
-        Coordinates coordinates2 = new Coordinates(8, 8);
-        Coordinates coordinates3 = new Coordinates(9, 8);
-        Coordinates coordinates4 = new Coordinates(10, 8);
+        Coordinates coordinates1 = new Coordinates(6, 8);
+        Coordinates coordinates2 = new Coordinates(7, 8);
+        Coordinates coordinates3 = new Coordinates(8, 8);
+        Coordinates coordinates4 = new Coordinates(9, 8);
 
         assertTrue(shipsField.isEmptyCell(coordinates1));
         assertTrue(shipsField.isEmptyCell(coordinates2));
@@ -77,14 +80,15 @@ class ShipsFieldTest {
     void checkNotEmptyCell() {
         shipsField.placeShip(shipHorizontal);
 
-        Coordinates coordinates1 = new Coordinates(7, 7);
-        Coordinates coordinates2 = new Coordinates(8, 7);
-        Coordinates coordinates3 = new Coordinates(9, 7);
-        Coordinates coordinates4 = new Coordinates(10, 7);
+        Coordinates coordinates1 = new Coordinates(6, 7);
+        Coordinates coordinates2 = new Coordinates(7, 7);
+        Coordinates coordinates3 = new Coordinates(8, 7);
+        Coordinates coordinates4 = new Coordinates(9, 7);
 
         assertFalse(shipsField.isEmptyCell(coordinates1));
         assertFalse(shipsField.isEmptyCell(coordinates2));
         assertFalse(shipsField.isEmptyCell(coordinates3));
         assertFalse(shipsField.isEmptyCell(coordinates4));
     }
+
 }
