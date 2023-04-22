@@ -7,5 +7,15 @@ package com.github.avrocoder;
  * DESTROYED - damaged deck and destroyed ship
  */
 public enum DeckStatus {
-    INTACT, DAMAGED, DESTROYED
+    INTACT,
+    DAMAGED,
+    DESTROYED;
+
+    public String getImage() {
+        return switch (this) {
+            case INTACT -> "[ ]";
+            case DAMAGED -> " X ";
+            case DESTROYED -> "[X]";
+        };
+    }
 }
