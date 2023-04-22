@@ -8,13 +8,18 @@ public abstract class Field<T> {
     private final int height;
     protected final Map<Coordinates, T> map = new HashMap<>();
 
+    public Field() {
+        width = 10;
+        height = 10;
+    }
+
     public Field(int width, int height) {
         this.width = width;
         this.height = height;
     }
 
     public int getWidth() {
-        return width;
+            return width;
     }
 
     public int getHeight() {
