@@ -56,7 +56,6 @@ class ShipValidationTest {
         ShipValidation shipValidation = new ShipValidation(ship, shipsField);
 
         shipValidation.validate();
-        System.out.println(shipValidation.getMessages());
         assertTrue(shipValidation.validate());
     }
 
