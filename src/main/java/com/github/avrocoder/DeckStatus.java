@@ -13,9 +13,9 @@ public enum DeckStatus {
 
     public String getImage() {
         return switch (this) {
-            case INTACT -> "[ ]";
-            case DAMAGED -> " X ";
-            case DESTROYED -> "[X]";
+            case INTACT -> "\ud83d\udd33";
+            case DAMAGED -> "\ud83c\udfaf";
+            case DESTROYED -> "\ud83d\udd25";
         };
     }
 }
